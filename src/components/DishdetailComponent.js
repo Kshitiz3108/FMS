@@ -33,17 +33,17 @@ import {Card,CardImg,CardTitle, CardBody, CardText} from 'reactstrap';
 
     const Dishdetail=(props)=>
     {
-        const di=props.dish;
+        const dish=props.dish;
 
-        if(di!=null){
+        if(dish!=null){
             return(
                 <div className="container">
                     
                 <div className="row">
                     <div className="col-md-5 mt-1">
-                   <RenderDishItem dish={di} />     
+                   <RenderDishItem dish={dish} />     
                     </div>
-                    <RenderComments comm={di.comments}></RenderComments>
+                    <RenderComments comm={dish.comments}></RenderComments>
                 </div>
                 </div>
                 
