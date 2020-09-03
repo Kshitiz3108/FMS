@@ -4,6 +4,8 @@ import Menu from './MenuComponent';
 import {DISHES} from '../shared/dishes';
 import Dishdetail from './DishdetailComponent';
 import Footer from './FooterComponent';
+import Home from './HomeComponent';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 
 class Main extends Component  {
@@ -23,11 +25,20 @@ class Main extends Component  {
   }
 
   render() {
+    const Homepage=()=>{
+      return(
+        <Home />
+      )
+    };
     return (
+      
     <div className="App">
         <Header/>
-        <Menu dishes={this.state.dishes} onClick={(dishId)=>this.onDishSelect(dishId)} />
-        <Dishdetail dish={this.state.dishes.filter((dish)=>dish.id===this.state.selectedDish)[0]}></Dishdetail>
+        <Switch>
+          <Route path="/home" component={Homepage}></Route>
+          <Route path="/menu" component={()=><Menu dishes={this.state.dishes}/>}></Route>
+          <Redirect to="/home"></Redirect>
+        </Switch>
         <Footer />
     </div>
   );
