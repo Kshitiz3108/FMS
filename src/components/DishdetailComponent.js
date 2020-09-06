@@ -1,5 +1,6 @@
 import React from 'react';
-import {Card,CardImg,CardTitle, CardBody, CardText} from 'reactstrap';
+import {Card,CardImg,CardTitle, CardBody, CardText, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
     function RenderComments({comm}){
@@ -7,7 +8,14 @@ import {Card,CardImg,CardTitle, CardBody, CardText} from 'reactstrap';
             return(
             <div key={comment.id}>
                     <p className="text-left">{comment.comment}</p>
-                    <p className="text-left">-- {comment.author},{comment.date}</p>
+                    <p>
+                    -- {comment.author} ,{" "}
+                    {new Intl.DateTimeFormat("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "2-digit"
+                    }).format(new Date(Date.parse(comment.date)))}
+                  </p>
             </div>
             )
         });
@@ -33,27 +41,28 @@ import {Card,CardImg,CardTitle, CardBody, CardText} from 'reactstrap';
 
     const Dishdetail=(props)=>
     {
-        const dish=props.dish;
 
-        if(dish!=null){
             return(
                 <div className="container">
-                    
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dishes.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dishes.name}</h3>
+                        <hr />
+                    </div>                
+                </div> 
                 <div className="row">
                     <div className="col-md-5 mt-1">
-                   <RenderDishItem dish={dish} />     
+                   <RenderDishItem dish={props.dishes} />     
                     </div>
-                    <RenderComments comm={dish.comments}></RenderComments>
+                    <RenderComments comm={props.comments}></RenderComments>
                 </div>
                 </div>
                 
             );
-        }
-        else{
-            return(
-                <div></div>
-            )
-        }
     }
         
     
