@@ -14,7 +14,7 @@ const mapStateToProps=state=>{
   return{
     dishes:state.dishes,
     leaders:state.leaders,
-    promotions:state.promotions,
+    promos:state.promos,
     comments:state.comments
   }
 }
@@ -27,11 +27,18 @@ class Main extends Component  {
 
   render() {
     const Homepage=()=>{
-      return(
-        <Home dish={this.props.dishes.filter((dish)=>dish.featured)[0]}
-              leader={this.props.leaders.filter((leader)=>leader.featured)[0]} 
-              promo={this.props.promos.filter((promo)=>promo.featured)[0]}/>
-      );
+      if(this.props!=null){
+        return(
+          <Home dish={this.props.dishes.filter((dish)=>dish.featured)[0]}
+                leader={this.props.leaders.filter((leader)=>leader.featured)[0]} 
+                promo={this.props.promos.filter((promo)=>promo.featured)[0]}/>
+        );
+      }
+      else{
+        return(
+          <div></div>
+        )
+      }
     }
 
     const DishwithId=({match})=>{
