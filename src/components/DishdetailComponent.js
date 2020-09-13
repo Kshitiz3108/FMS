@@ -8,7 +8,7 @@ const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
-export class Commentmodal extends Component{
+class Commentmodal extends Component{
 
     constructor(props){
         super(props);
@@ -28,14 +28,13 @@ export class Commentmodal extends Component{
 
     handleSubmit(values){
         this.toggleModal();
-
-        console.log('comment:', values);
-        alert('comment:' + JSON.stringify(values));
+        this.props.addComment(this.props.dishId,values.rating,values.author,values.message)
     }
 
     render(){
         return(
             <div>
+                <RenderComments comm={this.props.comments}></RenderComments>
                 <Button outline onClick={this.toggleModal}>
                     <span className="fa fa-pencil fa-lg"> Submit comment</span>
                 </Button>
@@ -106,7 +105,6 @@ export class Commentmodal extends Component{
             <div >
                 <h3>Comments</h3>
                 {comments}
-                <Commentmodal />
             </div>
         ) ; 
     }
@@ -144,7 +142,7 @@ export class Commentmodal extends Component{
                    <RenderDishItem dish={props.dishes} />     
                     </div>
                     <div className="col-md-8">
-                    <RenderComments comm={props.comments} className="col-md-8"></RenderComments>
+                    <Commentmodal  comments={props.comments} addComment={props.addComment} dishId={props.dishes.id} className="col-md-8"></Commentmodal>
                     </div>          
                 </div>
                 
