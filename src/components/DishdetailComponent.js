@@ -124,32 +124,35 @@ class Commentmodal extends Component{
     const Dishdetail=(props)=>
     {
 
-
+        if(props.dishes!=null){
             return(
                 <div className="container">
-                <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>{props.dishes.name}</BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12">
-                        <h3>{props.dishes.name}</h3>
-                        <hr />
-                    </div>                
-                </div> 
-                <div className="row">
-                    <div className="col-md-4 mt-1">
-                   <RenderDishItem dish={props.dishes} />     
+                    <div className="row">
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{props.dishes.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h3>{props.dishes.name}</h3>
+                            <hr />
+                        </div>                
+                    </div> 
+                    <div className="row">
+                        <div className="col-md-4 mt-1">
+                            <RenderDishItem dish={props.dishes} />     
+                        </div>
+                        <div className="col-md-8">
+                            <Commentmodal  comments={props.comments} addComment={props.addComment} dishId={props.dishes.id} className="col-md-8"></Commentmodal>
+                        </div>          
                     </div>
-                    <div className="col-md-8">
-                    <Commentmodal  comments={props.comments} addComment={props.addComment} dishId={props.dishes.id} className="col-md-8"></Commentmodal>
-                    </div>          
                 </div>
-                
-            
-                </div>
-                
             );
+        }
+        else{
+            return(
+                <div></div>
+            )
+        }
     }
         
     
